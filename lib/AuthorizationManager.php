@@ -169,10 +169,16 @@ class AuthorizationManager
 	}
 
 	private function add_search_members(SE $s){
-		$result = $s->query();
-		while($u=$result->fetchArray()){
+		$dl = $s->getDynamicList();
+		// Remove the default 100 rows limit!
+		$dl->setPageSize(null);
+
+		$sql = $dl->SQL();
+		$result = DB::getInstance()->get($sql);
+		foreach($result as $u){
 			$member = new Entity\SearchMember();
-			$member->user_id = $u["id"];
+			$user = (array)$u; // Cast stdClass as array
+			$member->user_id = $user["id"];
 			$member->search_id = $s->id;
 			$member->save();
 			}
