@@ -223,6 +223,13 @@ class AuthorizationManager
 		}
 	}
 
+	public function refresh(string $id): void
+	{
+		$authorizations = $this->getAuthorizations(client_id: $id);
+		foreach ($authorizations as $authorization) {
+			$this->refresh_search_members($authorization->search_id);
+		}
+	}
 
 	public function save(): void
 	{

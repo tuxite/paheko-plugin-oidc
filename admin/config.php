@@ -52,6 +52,11 @@ $form->runIf(condition: 'disable' ?? null !== null, fn: function () use ($n) {
 	$n->save();
 }, csrf_key: null, redirect: './config.php?ok');
 
+// Refresh search members
+$form->runIf(condition: 'refresh' ?? null !== null, fn: function () use ($n) {
+	$n->refresh((int)f(key: 'client_pk'));
+}, csrf_key: null, redirect: './config.php?ok');
+
 // Template
 $client_type = [
 	"0" => "Client public",

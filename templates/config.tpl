@@ -41,6 +41,7 @@
 				<form method="post" action="{$self_url}">
 				{csrf_field key=$csrf_key}
 				{input type="hidden" name="client_pk" default=$n.client_pk}
+				{button name="refresh" label="Rafraîchir" shape="reset" type="submit"}
 				{if $n.client_enabled}
 					{button name="disable" label="Désactiver" shape="eye-off" type="submit"}
 			 	{else}
